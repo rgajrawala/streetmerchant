@@ -1,26 +1,29 @@
-import {Link, Store} from '../store/model';
+import {BestBuy} from '../store/model/bestbuy';
+import {Newegg} from '../store/model/newegg';
 import {sendNotification} from '../notification';
 
-const link: Link = {
-	brand: 'test:brand',
-	cartUrl: 'https://www.example.com/cartUrl',
-	model: 'test:model',
-	series: 'test:series',
-	url: 'https://www.example.com/url'
-};
+sendNotification({
+	brand: 'nvidia',
+	cartUrl: 'https://api.bestbuy.com/click/-/6429442/cart',
+	model: 'founders edition',
+	series: '3070',
+	url: 'https://www.bestbuy.com/site/nvidia-geforce-rtx-3070-8gb-gddr6-pci-express-4-0-graphics-card-dark-platinum-and-black/6429442.p?skuId=6429442&intl=nosplash'
+}, BestBuy);
 
-const store: Store = {
-	labels: {
-		inStock: {
-			container: 'test:container',
-			text: ['test:text']
-		}
-	},
-	links: [link],
-	name: 'test:name'
-};
+sendNotification({
+	brand: 'amd',
+	cartUrl: 'https://secure.newegg.com/Shopping/AddtoCart.aspx?Submit=ADD&ItemList=N82E16819113663',
+	itemNumber: '19-113-663',
+	model: '5950x',
+	series: 'ryzen5950',
+	url: 'https://www.newegg.com/amd-ryzen-9-5950x/p/N82E16819113663'
+}, Newegg);
 
-/**
- * Send test email.
- */
-sendNotification(link, store);
+sendNotification({
+	brand: 'amd',
+	cartUrl: 'https://secure.newegg.com/Shopping/AddtoCart.aspx?Submit=ADD&ItemList=N82E16819113664',
+	itemNumber: '19-113-664',
+	model: '5900x',
+	series: 'ryzen5900',
+	url: 'https://www.newegg.com/amd-ryzen-9-5900x/p/N82E16819113664'
+}, Newegg);

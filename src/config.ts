@@ -127,10 +127,7 @@ const logLevel = envOrString(process.env.LOG_LEVEL, 'info');
 
 const notifications = {
 	desktop: process.env.DESKTOP_NOTIFICATIONS === 'true',
-	discord: {
-		notifyGroup: envOrArray(process.env.DISCORD_NOTIFY_GROUP),
-		webHookUrl: envOrArray(process.env.DISCORD_WEB_HOOK)
-	},
+	discord: process.env.DISCORD ? JSON.parse(process.env.DISCORD) : [],
 	email: {
 		password: envOrString(process.env.EMAIL_PASSWORD),
 		smtpAddress: envOrString(process.env.SMTP_ADDRESS),
