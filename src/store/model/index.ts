@@ -1,6 +1,4 @@
 import {config, defaultStoreData} from '../../config';
-import {AMD} from './amd';
-import {AMDDe} from './amd-de';
 import {Adorama} from './adorama';
 import {Alternate} from './alternate';
 import {AlternateNL} from './alternate-nl';
@@ -9,8 +7,12 @@ import {AmazonCa} from './amazon-ca';
 import {AmazonDe} from './amazon-de';
 import {AmazonEs} from './amazon-es';
 import {AmazonFr} from './amazon-fr';
+import {AmazonIt} from './amazon-it';
 import {AmazonNl} from './amazon-nl';
 import {AmazonUk} from './amazon-uk';
+import {Amd} from './amd';
+import {AmdDe} from './amd-de';
+import {AmdIt} from './amd-it';
 import {Aria} from './aria';
 import {Arlt} from './arlt';
 import {Asus} from './asus';
@@ -23,12 +25,15 @@ import {Box} from './box';
 import {CanadaComputers} from './canadacomputers';
 import {Caseking} from './caseking';
 import {Ccl} from './ccl';
+import {Comet} from './comet';
 import {Computeruniverse} from './computeruniverse';
 import {Coolblue} from './coolblue';
 import {Coolmod} from './coolmod';
+import {Corsair} from './corsair';
 import {Currys} from './currys';
 import {Cyberport} from './cyberport';
 import {Ebuyer} from './ebuyer';
+import {Euronics} from './euronics';
 import {Evga} from './evga';
 import {EvgaEu} from './evga-eu';
 import {Galaxus} from './galaxus';
@@ -57,8 +62,11 @@ import {Scan} from './scan';
 import {Store} from './store';
 import {Target} from './target';
 import {TopAchat} from './topachat';
+import {Unieuro} from './unieuro';
 import {Very} from './very';
+import {VsGamers} from './vsgamers';
 import {Walmart} from './walmart';
+import {Xbox} from './xbox';
 import {Zotac} from './zotac';
 import {logger} from '../../logger';
 
@@ -73,8 +81,10 @@ export const storeList = new Map([
 	[AmazonFr.name, AmazonFr],
 	[AmazonNl.name, AmazonNl],
 	[AmazonUk.name, AmazonUk],
-	[AMD.name, AMD],
-	[AMDDe.name, AMDDe],
+	[AmazonIt.name, AmazonIt],
+	[Amd.name, Amd],
+	[AmdDe.name, AmdDe],
+	[AmdIt.name, AmdIt],
 	[Aria.name, Aria],
 	[Arlt.name, Arlt],
 	[Asus.name, Asus],
@@ -87,12 +97,15 @@ export const storeList = new Map([
 	[Caseking.name, Caseking],
 	[CanadaComputers.name, CanadaComputers],
 	[Ccl.name, Ccl],
+	[Comet.name, Comet],
 	[Computeruniverse.name, Computeruniverse],
 	[Coolblue.name, Coolblue],
 	[Coolmod.name, Coolmod],
+	[Corsair.name, Corsair],
 	[Currys.name, Currys],
 	[Cyberport.name, Cyberport],
 	[Ebuyer.name, Ebuyer],
+	[Euronics.name, Euronics],
 	[Evga.name, Evga],
 	[EvgaEu.name, EvgaEu],
 	[Galaxus.name, Galaxus],
@@ -119,10 +132,13 @@ export const storeList = new Map([
 	[Saturn.name, Saturn],
 	[Scan.name, Scan],
 	[Target.name, Target],
+	[TopAchat.name, TopAchat],
+	[Unieuro.name, Unieuro],
 	[Very.name, Very],
+	[VsGamers.name, VsGamers],
 	[Walmart.name, Walmart],
-	[Zotac.name, Zotac],
-	[TopAchat.name, TopAchat]
+	[Xbox.name, Xbox],
+	[Zotac.name, Zotac]
 ]);
 
 const brands = new Set();

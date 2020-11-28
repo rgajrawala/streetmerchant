@@ -44,7 +44,7 @@ async function main() {
 	// Add the address of the proxy server if defined
 	if (config.proxy.address) {
 		args.push(
-			`--proxy-server=http://${config.proxy.address}:${config.proxy.port}`
+			`--proxy-server=${config.proxy.protocol}://${config.proxy.address}:${config.proxy.port}`
 		);
 	}
 
@@ -94,7 +94,7 @@ async function stopAndExit() {
 async function loopMain() {
 	try {
 		await main();
-	} catch (error) {
+	} catch (error: unknown) {
 		logger.error(
 			'✖ something bad happened, resetting streetmerchant in 5 seconds',
 			error
