@@ -114,14 +114,18 @@ environment variables are **optional**._
 | Environment variable | Description | Notes |
 |:---:|---|---|
 | `COUNTRY` | [Supported country](#supported-countries) you want to be scraped | Currently only used by Nvidia, default: `usa` |
+| `MAX_PRICE_SERIES_3060TI` | Maximum price allowed for a match, applies 3060 Ti series cards (does not apply to these sites: Nvidia, Asus, EVGA) | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - Cards above `1234` will be skipped. |
 | `MAX_PRICE_SERIES_3070` | Maximum price allowed for a match, applies 3070 series cards (does not apply to these sites: Nvidia, Asus, EVGA) | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - Cards above `1234` will be skipped. |
 | `MAX_PRICE_SERIES_3080` | Maximum price allowed for a match, applies 3080 series cards (does not apply to these sites: Nvidia, Asus, EVGA) | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - Cards above `1234` will be skipped. |
 | `MAX_PRICE_SERIES_3090` | Maximum price allowed for a match, applies 3090 series cards (does not apply to these sites: Nvidia, Asus, EVGA) | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - Cards above `1234` will be skipped. |
+| `MAX_PRICE_SERIES_CORSAIR_SF` | Maximum price allowed for a match, applies to Corsair PSUs | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - PSUs above `1234` will be skipped. |
 | `MAX_PRICE_SERIES_RYZEN5600` | Maximum price allowed for a match, applies AMD 5600 series cpus | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - CPUs above `1234` will be skipped. |
 | `MAX_PRICE_SERIES_RYZEN5800` | Maximum price allowed for a match, applies AMD 5800 series cpus | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - CPUs above `1234` will be skipped. |
 | `MAX_PRICE_SERIES_RYZEN5900` | Maximum price allowed for a match, applies AMD 5900 series cpus | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - CPUs above `1234` will be skipped. |
 | `MAX_PRICE_SERIES_RYZEN5950` | Maximum price allowed for a match, applies AMD 5950 series cpus | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - CPUs above `1234` will be skipped. |
-| `MAX_PRICE_SERIES_CORSAIR_SF` | Maximum price allowed for a match, applies to Corsair PSUs | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - PSUs above `1234` will be skipped. |
+| `MAX_PRICE_SERIES_SONYPS5C` | Maximum price allowed for a match, applies PS5 console | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - PS5 above `1234` will be skipped. |
+| `MAX_PRICE_SERIES_SONYPS5DE` | Maximum price allowed for a match, applies PS5 digital edition | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - PS5 above `1234` will be skipped. |
+| `MAX_PRICE_SERIES_TEST` | Maximum price allowed for a match, applies `test:series` | Default: leave empty for no limit, otherwise enter a price (enter whole dollar amounts only, avoid use of: dollar symbols, commas, and periods.) e.g.: `1234` - PS5 above `1234` will be skipped. |
 | `MICROCENTER_LOCATION` | Specific MicroCenter location(s) to search | Comma separated, e.g.: `marietta,duluth`, default: `web` |
 | `NVIDIA_ADD_TO_CART_ATTEMPTS` | The maximum number of times the `nvidia-api` add to cart feature will be attempted before failing | Default: `10` |
 | `NVIDIA_SESSION_TTL` | The time in milliseconds to keep the cart active while using `nvidia-api` | Default: `60000` |
@@ -145,11 +149,15 @@ environment variables are **optional**._
 | Amazon (DE) | `amazon-de`|
 | Amazon (ES) | `amazon-es`|
 | Amazon (FR) | `amazon-fr`|
+| Amazon (IT) | `amazon-it`|
 | Amazon (NL) | `amazon-nl`|
 | Amazon (UK) | `amazon-uk`|
 | AMD | `amd`|
+| AMD (CA) | `amd-ca`|
 | AMD (DE) | `amd-de`|
 | AMD (IT) | `amd-it`|
+| AntOnline | `antonline`|
+| Argos (UK) | `argos`|
 | Aria PC (UK) | `aria`|
 | ARLT (DE) | `arlt`|
 | ASUS | `asus` |
@@ -162,6 +170,7 @@ environment variables are **optional**._
 | CanadaComputers (CA) | `canadacomputers` |
 | Caseking (DE) | `caseking`|
 | CCL (UK) | `ccl`|
+| Comet (IT) | `comet`|
 | Computeruniverse (DE) | `computeruniverse` |
 | Coolblue (NL) | `coolblue`|
 | Coolmod (ES) | `coolmod`|
@@ -169,11 +178,15 @@ environment variables are **optional**._
 | Currys (UK) | `currys`|
 | Cyberport (DE) | `cyberport` |
 | eBuyer (UK) | `ebuyer`|
+| ePrice (IT) | `eprice`|
+| Euronics (IT) | `euronics`|
+| Euronics (DE) | `euronics-de`|
 | EVGA | `evga`|
 | EVGA (EU) | `evga-eu`|
 | Galaxus (DE) | `galaxus`|
 | Game (UK) | `game`|
 | Gamestop | `gamestop`|
+| Gamestop (DE) | `gamestop-de`|
 | Kabum (BR) | `kabum`|
 | Mediamarkt (DE) | `mediamarkt`|
 | MemoryExpress (CA) | `memoryexpress`|
@@ -195,8 +208,10 @@ environment variables are **optional**._
 | Saturn (DE) | `saturn`|
 | Scan (UK) | `scan`|
 | Target | `target`|
+| Unieuro (IT) | `unieuro`|
 | Very (UK) | `very`|
 | Walmart | `walmart`|
+| Wipoid | `wipoid`|
 | Zotac | `zotac`|
 | TopAchat | `topachat`|
 
@@ -254,7 +269,7 @@ environment variables are **optional**._
 | `gigabyte` | `aorus master`, `aorus xtreme`, `eagle`, `eagle oc`, `gaming`, `gaming oc`, `turbo`, `vision`, `vision oc` |
 | `inno3d` | `gaming x3`, `ichill x3`, `ichill x4`, `twin x2 oc` |
 | `kfa2` | `sg`, `sg oc` |
-| `microsoft` | `xboxsx`, `xboxss` |
+| `microsoft` | `xbox series x`, `xbox series s` |
 | `msi` | `gaming x trio`, `ventus 2x oc`, `ventus 3x`, `ventus 3x oc` |
 | `nvidia` | `founders edition` |
 | `palit` | `gamerock oc`, `gaming pro`, `gaming pro oc` |
@@ -278,6 +293,7 @@ environment variables are **optional**._
 | `AMD RX 6800` | `rx6800` |
 | `AMD RX 6800XT` | `rx6800xt` |
 | `AMD RX 6900XT` | `rx6900xt` |
+| `Nvidia RTX 3060 Ti` | `3060ti` |
 | `Nvidia RTX 3070` | `3070` |
 | `Nvidia RTX 3080` | `3080` |
 | `Nvidia RTX 3090` | `3090` |
@@ -516,25 +532,19 @@ it. Very straight forward. Otherwise, Google more information related to your sy
 
 </details>
 
-**Q: Will I get banned from of the stores?** Perhaps, but getting a card is a nice outcome.
+**Q: Will I get banned from of the stores?** Perhaps, but it's the risk we're willing to take! To help minimize this, take a look at [#1050](https://github.com/jef/streetmerchant/issues/1050).
 
-**Q: I got a problem and need help!** File an [issue](https://github.com/jef/streetmerchant/issues/new/choose). I'll do
-my best to get to you. I work a full time job and this is only a hobby of mine.
+**Q: I got a problem and need help!** File an [issue](https://github.com/jef/streetmerchant/issues/new/choose). I'll do my best to get to you. I work a full time job and this is only a hobby of mine.
 
-**Q: How do I get the latest code?** Take look at
-this [wiki page](https://github.com/jef/streetmerchant/wiki/Troubleshoot:-General:-Getting-the-latest-code).
+**Q: How do I get the latest code?** Take look at this [wiki page](https://github.com/jef/streetmerchant/wiki/Troubleshoot:-General:-Getting-the-latest-code).
 
-**Q: Why don't my notifications work?** There is probably
-an [issue](https://github.com/jef/streetmerchant/issues?q=is%3Aissue+sort%3Aupdated-desc+sound+is%3Aclosed) that
-has [already](https://github.com/jef/streetmerchant/issues/182) [been](https://github.com/jef/streetmerchant/issues/116) [resolved](https://github.com/jef/streetmerchant/issues/155)
-.
+**Q: Why don't my notifications work?** There is probably an [issue](https://github.com/jef/streetmerchant/issues?q=is%3Aissue+sort%3Aupdated-desc+sound+is%3Aclosed) that has [already](https://github.com/jef/streetmerchant/issues/182) [been](https://github.com/jef/streetmerchant/issues/116) [resolved](https://github.com/jef/streetmerchant/issues/155).
 
-**Q: I'd love to contribute, how do I do that?** Make
-a [pull request](https://github.com/jef/streetmerchant/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc)! All contributions
-are welcome.
+**Q: I'd love to contribute, how do I do that?** Make a [pull request](https://github.com/jef/streetmerchant/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc)! All contributions are welcome.
 
-**Q: Why do I have to download all this stuff just to get this bot working?** Well, I would rather you didn't either.
-See [#11](https://github.com/jef/streetmerchant/issues/11).
+**Q: How do I add a store?** Take a look at [this page](https://github.com/jef/streetmerchant/wiki/Help:-Configuration:-Adding-a-store) on the wiki.
+
+**Q: Why do I have to download all this stuff just to get this bot working?** Well, I would rather you didn't either. See [#11](https://github.com/jef/streetmerchant/issues/11).
 
 **Q: Why does Amazon show an error page (with a picture of an animal) instead of adding to cart or going to the detail page?** This is intended; see [#733](https://github.com/jef/streetmerchant/issues/733). This indicates that the item is out of stock and only available from a third-party seller (often at a markup).
 

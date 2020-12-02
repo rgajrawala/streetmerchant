@@ -11,8 +11,11 @@ import {AmazonIt} from './amazon-it';
 import {AmazonNl} from './amazon-nl';
 import {AmazonUk} from './amazon-uk';
 import {Amd} from './amd';
+import {AmdCa} from './amd-ca';
 import {AmdDe} from './amd-de';
 import {AmdIt} from './amd-it';
+import {AntOnline} from './antonline';
+import {Argos} from './argos';
 import {Aria} from './aria';
 import {Arlt} from './arlt';
 import {Asus} from './asus';
@@ -33,12 +36,15 @@ import {Corsair} from './corsair';
 import {Currys} from './currys';
 import {Cyberport} from './cyberport';
 import {Ebuyer} from './ebuyer';
+import {Eprice} from './eprice';
 import {Euronics} from './euronics';
+import {EuronicsDE} from './euronics-de';
 import {Evga} from './evga';
 import {EvgaEu} from './evga-eu';
 import {Galaxus} from './galaxus';
 import {Game} from './game';
 import {Gamestop} from './gamestop';
+import {GamestopDE} from './gamestop-de';
 import {Kabum} from './kabum';
 import {Mediamarkt} from './mediamarkt';
 import {MemoryExpress} from './memoryexpress';
@@ -66,6 +72,7 @@ import {Unieuro} from './unieuro';
 import {Very} from './very';
 import {VsGamers} from './vsgamers';
 import {Walmart} from './walmart';
+import {Wipoid} from './wipoid';
 import {Xbox} from './xbox';
 import {Zotac} from './zotac';
 import {logger} from '../../logger';
@@ -83,8 +90,11 @@ export const storeList = new Map([
 	[AmazonUk.name, AmazonUk],
 	[AmazonIt.name, AmazonIt],
 	[Amd.name, Amd],
+	[AmdCa.name, AmdCa],
 	[AmdDe.name, AmdDe],
 	[AmdIt.name, AmdIt],
+	[AntOnline.name, AntOnline],
+	[Argos.name, Argos],
 	[Aria.name, Aria],
 	[Arlt.name, Arlt],
 	[Asus.name, Asus],
@@ -105,12 +115,15 @@ export const storeList = new Map([
 	[Currys.name, Currys],
 	[Cyberport.name, Cyberport],
 	[Ebuyer.name, Ebuyer],
+	[Eprice.name, Eprice],
 	[Euronics.name, Euronics],
+	[EuronicsDE.name, EuronicsDE],
 	[Evga.name, Evga],
 	[EvgaEu.name, EvgaEu],
 	[Galaxus.name, Galaxus],
 	[Game.name, Game],
 	[Gamestop.name, Gamestop],
+	[GamestopDE.name, GamestopDE],
 	[Kabum.name, Kabum],
 	[Mediamarkt.name, Mediamarkt],
 	[MemoryExpress.name, MemoryExpress],
@@ -137,6 +150,7 @@ export const storeList = new Map([
 	[Very.name, Very],
 	[VsGamers.name, VsGamers],
 	[Walmart.name, Walmart],
+	[Wipoid.name, Wipoid],
 	[Xbox.name, Xbox],
 	[Zotac.name, Zotac]
 ]);
@@ -224,6 +238,7 @@ export function updateStores() {
 			stores.set(storeData.name, store);
 			store.minPageSleep = storeData.minPageSleep;
 			store.maxPageSleep = storeData.maxPageSleep;
+			store.proxyList = storeData.proxyList;
 		} else {
 			logger.warn(`No store named ${storeData.name}, skipping.`);
 		}

@@ -34,6 +34,7 @@ export type Brand =
 
 export type Series =
 	| 'test:series'
+	| '3060ti'
 	| '3070'
 	| '3080'
 	| '3090'
@@ -64,6 +65,7 @@ export type Model =
 	| 'aorus master'
 	| 'aorus xtreme'
 	| 'aorus'
+	| 'challenger'
 	| 'dual fan'
 	| 'dual oc'
 	| 'dual'
@@ -82,19 +84,24 @@ export type Model =
 	| 'ichill x2'
 	| 'ichill x3'
 	| 'ichill x4'
+	| 'nitro+'
 	| 'nitro oc se'
 	| 'nitro oc'
+	| 'phantom gaming'
 	| 'phantom gs'
 	| 'phoenix gs oc'
 	| 'phoenix gs'
 	| 'phoenix'
 	| 'ps5 console'
 	| 'ps5 digital'
+	| 'red devil'
 	| 'sg oc'
 	| 'sg'
+	| 'merc'
 	| 'strix lc'
 	| 'strix oc'
 	| 'strix'
+	| 'taichi'
 	| 'trinity oc'
 	| 'trinity'
 	| 'tuf oc'
@@ -171,4 +178,7 @@ export type Store = {
 	waitUntil?: LoadEvent;
 	minPageSleep?: number;
 	maxPageSleep?: number;
+
+	proxyList?: string[];
+	currentProxyIndex?: number;
 };
