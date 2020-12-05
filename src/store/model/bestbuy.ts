@@ -18,7 +18,7 @@ export const BestBuy: Store = {
 			model: 'test:model',
 			series: 'test:series',
 			url:
-				'https://www.bestbuy.com/site/evga-sc-ultra-gaming-nvidia-geforce-gtx-1660-ti-6gb-gddr6-pci-express-3-0-graphics-card-black-gray/6373500.p?skuId=6373500&intl=nosplash'
+				'https://www.bestbuy.com/site/insignia-8qt-digital-multi-cooker-stainless-steel/6258941.p?skuId=6258941&intl=nosplash'
 		},
 		{
 			brand: 'nvidia',
@@ -388,7 +388,7 @@ export const BestBuy: Store = {
 		{
 			brand: 'msi',
 			model: 'amd reference',
-			series: 'rx6800xt',
+			series: 'rx6800',
 			url:
 				'https://www.bestbuy.com/site/msi-radeon-rx-6800-16g-16gb-gddr6-pci-express-4-0-graphics-card-black-black/6441020.p?skuId=6441020'
 		},
@@ -405,6 +405,13 @@ export const BestBuy: Store = {
 			series: 'rx6800xt',
 			url:
 				'https://www.bestbuy.com/site/xfx-amd-radeon-rx-6800xt-16gb-gddr6-pci-express-4-0-gaming-graphics-card-black/6441226.p?skuId=6441226'
+		},
+		{
+			brand: 'xfx',
+			model: 'merc',
+			series: 'rx6800xt',
+			url:
+				'https://www.bestbuy.com/site/xfx-merc-319-amd-radeon-rx-6800xt-16gb-gddr6-pci-express-4-0-gaming-graphics-card-black/6442585.p?skuId=6442585'
 		},
 		{
 			brand: 'corsair',
