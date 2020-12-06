@@ -22,6 +22,7 @@ export function sendDiscordMessage(link: Link, store: Store) {
 		try {
 			const embed = new MessageBuilder();
 			embed.setTitle('Stock Notification');
+			embed.addField('Link', link.url, true);
 			if (link.cartUrl)
 				embed.addField('Add To Cart Link', link.cartUrl, true);
 			embed.addField('Store', store.name, true);
