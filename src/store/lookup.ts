@@ -1,7 +1,7 @@
 import {Browser, Page, PageEventObj, Request, Response} from 'puppeteer';
 import {Link, Store, getStores} from './model';
 import {Print, logger} from '../logger';
-import {Selector, cardPrice, pageIncludesLabels} from './includes-labels';
+import {Selector, getPrice, pageIncludesLabels} from './includes-labels';
 import {
 	closePage,
 	delay,
@@ -126,10 +126,10 @@ async function lookup(browser: Browser, store: Store) {
 	}
 
 	if (store.linksBuilder) {
-		logger.info(`[${store.name}] Running linksBuilder...`);
 		const lastRunTime = linkBuilderLastRunTimes[store.name] ?? -1;
 		const ttl = store.linksBuilder.ttl ?? Number.MAX_SAFE_INTEGER;
 		if (lastRunTime === -1 || Date.now() - lastRunTime > ttl) {
+			logger.info(`[${store.name}] Running linksBuilder...`);
 			try {
 				await fetchLinks(store, browser);
 				linkBuilderLastRunTimes[store.name] = Date.now();
@@ -152,16 +152,18 @@ async function lookup(browser: Browser, store: Store) {
 
 		const proxy = nextProxy(store);
 
-		const useAdBlock = !config.browser.lowBandwidth && !store.disableAdBlocker;
+		const useAdBlock =
+			!config.browser.lowBandwidth && !store.disableAdBlocker;
 		const customContext = config.browser.isIncognito;
 
 		const context = customContext
 			? await browser.createIncognitoBrowserContext()
 			: browser.defaultBrowserContext();
 		const page = await context.newPage();
+		await page.setRequestInterception(true);
 
 		page.setDefaultNavigationTimeout(config.page.timeout);
-		await page.setUserAgent(getRandomUserAgent());
+		await page.setUserAgent(await getRandomUserAgent());
 
 		let adBlockRequestHandler: any;
 		let pageProxy;
@@ -212,9 +214,9 @@ async function lookup(browser: Browser, store: Store) {
 			statusCode = await lookupCard(browser, store, page, link);
 		} catch (error: unknown) {
 			logger.error(
-				`✖ [${store.name}] ${link.brand} ${link.series} ${link.model} - ${
-					(error as Error).message
-				}`
+				`✖ [${store.name}] ${link.brand} ${link.series} ${
+					link.model
+				} - ${(error as Error).message}`
 			);
 			const client = await page.target().createCDPSession();
 			await client.send('Network.clearBrowserCookies');
@@ -266,7 +268,9 @@ async function lookupCard(
 
 	if (await lookupCardInStock(store, page, link)) {
 		const givenUrl =
-			link.cartUrl && config.store.autoAddToCart ? link.cartUrl : link.url;
+			link.cartUrl && config.store.autoAddToCart
+				? link.cartUrl
+				: link.url;
 		logger.info(`${Print.inStock(link, store, true)}\n${givenUrl}`);
 
 		if (config.browser.open) {
@@ -303,29 +307,21 @@ async function lookupCardInStock(store: Store, page: Page, link: Link) {
 		type: 'textContent'
 	};
 
-	if (store.labels.inStock) {
-		const options = {
-			...baseOptions,
-			requireVisible: true,
-			type: 'outerHTML' as const
-		};
-
-		if (!(await pageIncludesLabels(page, store.labels.inStock, options))) {
-			logger.info(Print.outOfStock(link, store, true));
-			return false;
-		}
-	}
-
-	if (store.labels.outOfStock) {
-		if (await pageIncludesLabels(page, store.labels.outOfStock, baseOptions)) {
-			logger.info(Print.outOfStock(link, store, true));
+	if (store.labels.captcha) {
+		if (await pageIncludesLabels(page, store.labels.captcha, baseOptions)) {
+			logger.warn(Print.captcha(link, store, true));
+			await delay(getSleepTime(store));
 			return false;
 		}
 	}
 
 	if (store.labels.bannedSeller) {
 		if (
-			await pageIncludesLabels(page, store.labels.bannedSeller, baseOptions)
+			await pageIncludesLabels(
+				page,
+				store.labels.bannedSeller,
+				baseOptions
+			)
 		) {
 			logger.warn(Print.bannedSeller(link, store, true));
 			return false;
@@ -333,23 +329,12 @@ async function lookupCardInStock(store: Store, page: Page, link: Link) {
 	}
 
 	if (store.labels.maxPrice) {
-		const price = await cardPrice(
-			page,
-			store.labels.maxPrice,
-			config.store.maxPrice.series[link.series],
-			baseOptions
-		);
 		const maxPrice = config.store.maxPrice.series[link.series];
-		if (price) {
-			logger.info(Print.maxPrice(link, store, price, maxPrice, true));
-			return false;
-		}
-	}
 
-	if (store.labels.captcha) {
-		if (await pageIncludesLabels(page, store.labels.captcha, baseOptions)) {
-			logger.warn(Print.captcha(link, store, true));
-			await delay(getSleepTime(store));
+		link.price = await getPrice(page, store.labels.maxPrice, baseOptions);
+
+		if (link.price && link.price > maxPrice && maxPrice > 0) {
+			logger.info(Print.maxPrice(link, store, maxPrice, true));
 			return false;
 		}
 	}
@@ -363,12 +348,49 @@ async function lookupCardInStock(store: Store, page: Page, link: Link) {
 	// 	return store.realTimeInventoryLookup(link.itemNumber);
 	// }
 
+	if (store.labels.outOfStock) {
+		if (
+			await pageIncludesLabels(page, store.labels.outOfStock, baseOptions)
+		) {
+			logger.info(Print.outOfStock(link, store, true));
+			return false;
+		}
+	}
+
+	if (store.labels.inStock) {
+		const options = {
+			...baseOptions,
+			requireVisible: true,
+			type: 'outerHTML' as const
+		};
+
+		if (!(await pageIncludesLabels(page, store.labels.inStock, options))) {
+			logger.info(Print.outOfStock(link, store, true));
+			return false;
+		}
+	}
+
+	if (link.labels?.inStock) {
+		const options = {
+			...baseOptions,
+			requireVisible: true,
+			type: 'outerHTML' as const
+		};
+
+		if (!(await pageIncludesLabels(page, link.labels.inStock, options))) {
+			logger.info(Print.outOfStock(link, store, true));
+			return false;
+		}
+	}
+
 	return true;
 }
 
 export async function tryLookupAndLoop(browser: Browser, store: Store) {
 	if (!browser.isConnected()) {
-		logger.debug(`[${store.name}] Ending this loop as browser is disposed...`);
+		logger.debug(
+			`[${store.name}] Ending this loop as browser is disposed...`
+		);
 		return;
 	}
 

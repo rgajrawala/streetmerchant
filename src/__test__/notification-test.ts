@@ -1,12 +1,17 @@
-import {BestBuy} from '../store/model/bestbuy';
-import {Newegg} from '../store/model/newegg';
 import {sendNotification} from '../notification';
+import {BestBuy} from '../store/model/bestbuy';
 
-sendNotification({
+const link: Link = {
 	brand: 'nvidia',
-	cartUrl: 'https://api.bestbuy.com/click/-/6439402/cart',
+	cartUrl: 'https://api.bestbuy.com/click/-/6429440/cart',
 	model: 'founders edition',
-	series: '3060ti',
+	price: 700,
+	series: '3080',
 	url:
-		'https://www.bestbuy.com/site/nvidia-geforce-rtx-3060-ti-8gb-gddr6-pci-express-4-0-graphics-card-steel-and-black/6439402.p?skuId=6439402&intl=nosplash'
-}, BestBuy);
+		'https://www.bestbuy.com/site/nvidia-geforce-rtx-3080-10gb-gddr6x-pci-express-4-0-graphics-card-titanium-and-black/6429440.p?skuId=6429440&intl=nosplash'
+};
+
+/**
+ * Send test email.
+ */
+sendNotification(link, BestBuy);

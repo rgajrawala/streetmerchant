@@ -16,7 +16,7 @@ export const AmazonNl: Store = {
 			]
 		},
 		maxPrice: {
-			container: 'span[class*="PriceString"]',
+			container: '#priceblock_ourprice',
 			euroFormat: true
 		},
 		outOfStock: [
@@ -26,7 +26,9 @@ export const AmazonNl: Store = {
 			},
 			{
 				container: '#outOfStock',
-				text: ['we weten niet of en wanneer dit item weer op voorraad is']
+				text: [
+					'we weten niet of en wanneer dit item weer op voorraad is'
+				]
 			}
 		]
 	},
