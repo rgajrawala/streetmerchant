@@ -1,4 +1,5 @@
 import {sendNotification} from '../notification';
+import {Link} from '../store/model';
 import {BestBuy} from '../store/model/bestbuy';
 
 const link: Link = {
